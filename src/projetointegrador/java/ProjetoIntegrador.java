@@ -10,5 +10,7 @@ package projetointegrador.java;
  * @author willian.falcao
  */
 public class ProjetoIntegrador {
-    
+    public static void main(String[] args) {
+        System.out.println("olá mundo!");
+    }
 }
