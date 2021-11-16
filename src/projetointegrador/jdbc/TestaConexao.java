@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projetointegrador.jbdc;
+package projetointegrador.jdbc;
 import javax.swing.JOptionPane;
 /**
  *
@@ -17,6 +17,5 @@ public class TestaConexao {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        
     }
 }
