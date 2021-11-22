@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package projetointegrador.dao;
 
 import projetointegrador.model.Clientes;
@@ -13,7 +9,20 @@ import projetointegrador.model.Enderecos;
  */
 public class TesteDAO {
     public static void main(String[] args) {
-//         TESTE DO CADASTRAR
+//      TESTE DO CADASTRAR CLIENTE
+        Clientes clienteTeste = new Clientes();
+        clienteTeste.setNome("nome");
+        clienteTeste.setCpf("123.456.789-50 ");
+        clienteTeste.setEmail("email@email.com");
+        clienteTeste.setTelefone("(49) 99999-9999");
+        
+        System.out.println(clienteTeste.getId());
+        
+        ClientesDAO dao = new ClientesDAO();
+        dao.cadastrarCliente(clienteTeste);
+        
+        System.out.println(clienteTeste.getId());
+        
 //        Enderecos enderecoTeste = new Enderecos();
 //        
 //        enderecoTeste.setCep("88888-88");
@@ -27,17 +36,9 @@ public class TesteDAO {
 //        EnderecosDAO dao = new EnderecosDAO();
 //        dao.cadastrarEndereco(enderecoTeste);
 
-//        TESTE DO LISTAR
-          EnderecosDAO dao = new EnderecosDAO();
-          dao.listarEnderecos();
-          
-          Clientes clienteTeste = new Clientes();
-          clienteTeste.setCpf("123.456.789-50");
-          clienteTeste.setEmail("cliente@email.com");
-          clienteTeste.setId(0);
-          clienteTeste.setNome("nome");
-          clienteTeste.setTelefone("3");
-          
+//        TESTE DO LISTAR ENDERECO
+//          EnderecosDAO dao = new EnderecosDAO();
+//          dao.listarEnderecos();
 
     }
    

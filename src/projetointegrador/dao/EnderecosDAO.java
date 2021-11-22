@@ -90,7 +90,6 @@ public class EnderecosDAO {
                 obj.setBairro(rs.getString("bairro"));
                 obj.setCidade(rs.getString("cidade"));
                 obj.setUf(rs.getString("uf"));
-                //obj.setCliente(cliente);
                 
                 //Após todos os atributos serem inserido dentro do objeto
                 //preciso adicionar esse objeto na minha lista de enderecos

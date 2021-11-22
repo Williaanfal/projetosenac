@@ -121,7 +121,7 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Cep", "Rua", "Número", "Complemento", "Bairro", "Cidade", "UF"
+                "ID", "Cep", "Rua", "Número", "Complemento", "Bairro", "Cidade", "UF", "ID Cliente"
             }
         ));
         jScrollPane2.setViewportView(jTableEnderecos);

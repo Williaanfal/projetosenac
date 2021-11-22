@@ -84,6 +84,4 @@ public class Enderecos {
     public void setCliente(Clientes cliente) {
         this.cliente = cliente;
     }
-
- 
 }

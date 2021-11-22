@@ -5,6 +5,7 @@
  */
 package projetointegrador.view;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import projetointegrador.dao.ClientesDAO;
 import projetointegrador.model.Enderecos;
@@ -17,7 +18,7 @@ import projetointegrador.model.Clientes;
  */
 public class FrmTelaClientes extends javax.swing.JFrame {
     
-    private void tabelarClientes() {
+    private void listarClientes() {
         ClientesDAO dao = new ClientesDAO();
         
         List<Clientes> lista = dao.listarClientes();
@@ -73,7 +74,7 @@ public class FrmTelaClientes extends javax.swing.JFrame {
         TextFieldNumeroEndereco1 = new javax.swing.JTextField();
         jLabel45 = new javax.swing.JLabel();
         TextFieldBairroEndereco1 = new javax.swing.JTextField();
-        TextFieldUfEndereco1 = new javax.swing.JComboBox<>();
+        jComboBoxUfEndereco1 = new javax.swing.JComboBox<>();
         jLabel46 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
@@ -83,9 +84,9 @@ public class FrmTelaClientes extends javax.swing.JFrame {
         TextFieldCepEndereco1 = new javax.swing.JFormattedTextField();
         jLabel49 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
-        jButtonSalvarEndereco = new javax.swing.JButton();
         TextFieldComplementoEndereco1 = new javax.swing.JFormattedTextField();
         jButtonListarEnderecos = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jTextField28 = new javax.swing.JTextField();
         jLabel39 = new javax.swing.JLabel();
@@ -117,17 +118,15 @@ public class FrmTelaClientes extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jLabelClientId = new javax.swing.JLabel();
-        jButtonSalvarCliente = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableClientes = new javax.swing.JTable();
-        jTextField3 = new javax.swing.JTextField();
+        TextFieldBuscaCliente = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonBuscarClientes = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButtonAtualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 102));
@@ -197,7 +196,13 @@ public class FrmTelaClientes extends javax.swing.JFrame {
 
         jLabel45.setText("Bairro");
 
-        TextFieldUfEndereco1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RO", "AC", "AM", "RR", "PA", "AP", "TO", "MA", "PI", "CE", "RN", "PB", "PE", "AL", "SE", "BA", "MG", "ES", "RJ", "SP", "PR", "SC", "RS", "MS", "MT", "GO", "DF" }));
+        TextFieldBairroEndereco1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextFieldBairroEndereco1ActionPerformed(evt);
+            }
+        });
+
+        jComboBoxUfEndereco1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RO", "AC", "AM", "RR", "PA", "AP", "TO", "MA", "PI", "CE", "RN", "PB", "PE", "AL", "SE", "BA", "MG", "ES", "RJ", "SP", "PR", "SC", "RS", "MS", "MT", "GO", "DF" }));
 
         jLabel46.setText("Cidade");
 
@@ -222,13 +227,6 @@ public class FrmTelaClientes extends javax.swing.JFrame {
 
         jLabel50.setText("Complemento:");
 
-        jButtonSalvarEndereco.setText("Salvar Endereco");
-        jButtonSalvarEndereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSalvarEnderecoActionPerformed(evt);
-            }
-        });
-
         try {
             TextFieldComplementoEndereco1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("?")));
         } catch (java.text.ParseException ex) {
@@ -244,6 +242,13 @@ public class FrmTelaClientes extends javax.swing.JFrame {
         jButtonListarEnderecos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonListarEnderecosActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Novo Cadastro");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -289,12 +294,12 @@ public class FrmTelaClientes extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TextFieldUfEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(94, 94, 94)
-                        .addComponent(jButtonSalvarEndereco)
-                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxUfEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(jButton4)
+                        .addGap(31, 31, 31)
                         .addComponent(jButtonListarEnderecos)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,13 +326,13 @@ public class FrmTelaClientes extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TextFieldUfEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxUfEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel28)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonSalvarEndereco)
-                            .addComponent(jButtonListarEnderecos))))
+                            .addComponent(jButtonListarEnderecos)
+                            .addComponent(jButton4))))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
 
@@ -548,13 +553,6 @@ public class FrmTelaClientes extends javax.swing.JFrame {
         jLabelClientId.setForeground(new java.awt.Color(51, 153, 255));
         jLabelClientId.setText("ID:");
 
-        jButtonSalvarCliente.setText("Salvar Cliente");
-        jButtonSalvarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSalvarClienteActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -592,8 +590,6 @@ public class FrmTelaClientes extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
-                .addComponent(jButtonSalvarCliente)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -617,10 +613,8 @@ public class FrmTelaClientes extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7)
-                    .addComponent(jButtonSalvarCliente))
+                .addGap(12, 12, 12)
+                .addComponent(jLabel7)
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -638,12 +632,12 @@ public class FrmTelaClientes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableClientes);
 
-        jLabel8.setText("Nome:");
+        jLabel8.setText("Pesquisar:");
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscarClientes.setText("Buscar");
+        jButtonBuscarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonBuscarClientesActionPerformed(evt);
             }
         });
 
@@ -658,13 +652,6 @@ public class FrmTelaClientes extends javax.swing.JFrame {
 
         jButton5.setText("Excluir");
 
-        jButtonAtualizar.setText("Atualizar");
-        jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAtualizarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -675,11 +662,9 @@ public class FrmTelaClientes extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TextFieldBuscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonAtualizar))
+                        .addComponent(jButtonBuscarClientes))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(150, 150, 150)
                         .addComponent(jButton2)
@@ -687,17 +672,16 @@ public class FrmTelaClientes extends javax.swing.JFrame {
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
                         .addComponent(jButton5)))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextFieldBuscaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(jButton1)
-                    .addComponent(jButtonAtualizar))
+                    .addComponent(jButtonBuscarClientes))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -764,29 +748,16 @@ public class FrmTelaClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextFieldCepEndereco1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonBuscarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarClientesActionPerformed
+        //se o campo pesquisar estiver em branco, lista todos os clientes
+        if(TextFieldBuscaCliente.getText().isBlank()){
+            listarClientes();
+        }
+    }//GEN-LAST:event_jButtonBuscarClientesActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButtonSalvarEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarEnderecoActionPerformed
-
-        Enderecos endereco = new Enderecos();
-        
-        endereco.setCep(TextFieldCepEndereco1.getText());
-        endereco.setRua(TextFieldRuaEndereco1.getText());
-        endereco.setNumero(Integer.parseInt(TextFieldNumeroEndereco1.getText()));
-        endereco.setComplemento(TextFieldComplementoEndereco1.getText());
-        endereco.setBairro(TextFieldBairroEndereco1.getText());
-        endereco.setCidade(TextFieldCidadeEndereco1.getText());
-        endereco.setUf(TextFieldUfEndereco1.getSelectedItem().toString());
-        //endereco.setCliente(cliente);
-        EnderecosDAO enderecoDAO = new EnderecosDAO();
-        enderecoDAO.cadastrarEndereco(endereco);
-    }//GEN-LAST:event_jButtonSalvarEnderecoActionPerformed
 
     private void TextFieldComplementoEndereco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFieldComplementoEndereco1ActionPerformed
         // TODO add your handling code here:
@@ -797,21 +768,40 @@ public class FrmTelaClientes extends javax.swing.JFrame {
         telaListaEnderecos.setVisible(true);
     }//GEN-LAST:event_jButtonListarEnderecosActionPerformed
 
-    private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
-       tabelarClientes();
-    }//GEN-LAST:event_jButtonAtualizarActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            Clientes cliente = new Clientes();
+            cliente.setNome(TextFieldNomeCliente.getText());
+            cliente.setCpf(TextFieldCPFCliente.getText());
+            cliente.setEmail(TextFieldEmailCliente.getText());
+            cliente.setTelefone(TextFieldTelefoneCliente.getText());
 
-    private void jButtonSalvarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarClienteActionPerformed
-        Clientes cliente = new Clientes();
-        
-        cliente.setNome(TextFieldNomeCliente.getText());
-        cliente.setEmail(TextFieldEmailCliente.getText());
-        cliente.setCpf(TextFieldCPFCliente.getText());
-        cliente.setTelefone(TextFieldTelefoneCliente.getText());
-        
-        ClientesDAO clienteDAO = new ClientesDAO();
-        clienteDAO.cadastrarCliente(cliente);
-    }//GEN-LAST:event_jButtonSalvarClienteActionPerformed
+            ClientesDAO dao = new ClientesDAO();
+            dao.cadastrarCliente(cliente);
+            
+            
+            if(!TextFieldRuaEndereco1.getText().isBlank()){
+                Enderecos endereco = new Enderecos();
+                endereco.setCep(TextFieldCepEndereco1.getText());
+                endereco.setRua(TextFieldRuaEndereco1.getText());
+                endereco.setNumero(Integer.parseInt(TextFieldNumeroEndereco1.getText()));
+                endereco.setComplemento(TextFieldComplementoEndereco1.getText());
+                endereco.setBairro(TextFieldBairroEndereco1.getText());
+                endereco.setCidade(TextFieldCidadeEndereco1.getText());
+                endereco.setUf(jComboBoxUfEndereco1.getSelectedItem().toString());
+                endereco.setCliente(cliente);
+
+                EnderecosDAO daoEnd = new EnderecosDAO();
+                daoEnd.cadastrarEndereco(endereco);
+            }
+                    
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void TextFieldBairroEndereco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextFieldBairroEndereco1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextFieldBairroEndereco1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -851,6 +841,7 @@ public class FrmTelaClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TextFieldBairroEndereco1;
+    private javax.swing.JTextField TextFieldBuscaCliente;
     private javax.swing.JFormattedTextField TextFieldCPFCliente;
     private javax.swing.JFormattedTextField TextFieldCepEndereco1;
     private javax.swing.JTextField TextFieldCidadeEndereco1;
@@ -860,17 +851,15 @@ public class FrmTelaClientes extends javax.swing.JFrame {
     private javax.swing.JTextField TextFieldNumeroEndereco1;
     private javax.swing.JTextField TextFieldRuaEndereco1;
     private javax.swing.JFormattedTextField TextFieldTelefoneCliente;
-    private javax.swing.JComboBox<String> TextFieldUfEndereco1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButtonAtualizar;
+    private javax.swing.JButton jButtonBuscarClientes;
     private javax.swing.JButton jButtonListarEnderecos;
-    private javax.swing.JButton jButtonSalvarCliente;
-    private javax.swing.JButton jButtonSalvarEndereco;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBoxUfEndereco1;
     private javax.swing.JFormattedTextField jFormattedTextField7;
     private javax.swing.JFormattedTextField jFormattedTextField8;
     private javax.swing.JLabel jLabel1;
@@ -921,7 +910,6 @@ public class FrmTelaClientes extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField27;
     private javax.swing.JTextField jTextField28;
     private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField30;
     private javax.swing.JTextField jTextField31;
     private javax.swing.JTextField jTextField32;

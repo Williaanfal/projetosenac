@@ -39,14 +39,29 @@ public class ClientesDAO {
             comando.setString(2, obj.getEmail());
             comando.setString(3, obj.getNome());
             comando.setString(4, obj.getTelefone());
+            
 
             //4º passo: executar o comando sql e fechar a conexão
             comando.execute();
             comando.close();
-
+            
+            //5º passo: pegar o id gerado pelo banco de dados atraves do cpf
+            sql = "select id from tb_clientes where cpf=?";
+            comando = conexao.prepareStatement(sql);
+            comando.setString(1,obj.getCpf());
+            
+            //com o comando preparado, executo o comando
+            //esse comando é de leitura do banco de dados, logo ele retorna um resultset
+            ResultSet rs = comando.executeQuery();
+            
+            //percorro o resultado até achar o campo "id"
+            while(rs.next()) {
+                obj.setId(rs.getInt("id"));
+            }
+            
             //Se chegar aqui o cadastro foi efetuado com sucesso
             JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
-
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
