@@ -117,18 +117,20 @@ public class ClientesDAO {
         int opcao = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o cliente?", "", JOptionPane.OK_CANCEL_OPTION);
         if (opcao == 0){
             try {
+                /* maneira antiga de remover os endereços, atualizado para "on delete cascade" do banco de dados
                 String sql = "delete from tb_enderecos where id_cliente = ?";
                 PreparedStatement comando = conexao.prepareStatement(sql);
                 comando.setInt(1, obj.getId());
                   
                 comando.execute();
                 comando.close();
+                */
                 
                 //2º passo: criar uma string de comando SQL
-                sql = "delete from tb_clientes where id = ?";
+                String sql = "delete from tb_clientes where id = ?";
 
                 //3º passo: preparar o comando SQL para o driver
-                comando = conexao.prepareStatement(sql);
+                PreparedStatement comando = conexao.prepareStatement(sql);
                 comando.setInt(1, obj.getId());
 
                 //4º passo: executar o comando sql e fechar a conexão
