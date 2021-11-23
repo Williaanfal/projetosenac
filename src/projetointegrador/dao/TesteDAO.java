@@ -1,5 +1,6 @@
 package projetointegrador.dao;
 
+import javax.swing.JOptionPane;
 import projetointegrador.model.Clientes;
 import projetointegrador.model.Enderecos;
 
@@ -22,6 +23,12 @@ public class TesteDAO {
         dao.cadastrarCliente(clienteTeste);
         
         System.out.println(clienteTeste.getId());
+        
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o cliente?", "", JOptionPane.OK_CANCEL_OPTION);
+        if (opcao == 0){
+            JOptionPane.showMessageDialog(null, "bruh");
+        }
+      
         
 //        Enderecos enderecoTeste = new Enderecos();
 //        

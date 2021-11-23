@@ -9,6 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import jdk.dynalink.linker.support.Guards;
 import projetointegrador.jdbc.ConnectionFactory;
 import projetointegrador.model.Clientes;
 
@@ -109,6 +110,76 @@ public class ClientesDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
             return null;
+        } 
+    }
+    
+    public void deletarCliente(Clientes obj){
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o cliente?", "", JOptionPane.OK_CANCEL_OPTION);
+        if (opcao == 0){
+            try {
+                String sql = "delete from tb_enderecos where id_cliente = ?";
+                PreparedStatement comando = conexao.prepareStatement(sql);
+                comando.setInt(1, obj.getId());
+                  
+                comando.execute();
+                comando.close();
+                
+                //2º passo: criar uma string de comando SQL
+                sql = "delete from tb_clientes where id = ?";
+
+                //3º passo: preparar o comando SQL para o driver
+                comando = conexao.prepareStatement(sql);
+                comando.setInt(1, obj.getId());
+
+                //4º passo: executar o comando sql e fechar a conexão
+                comando.execute();
+                comando.close();
+
+                //Se chegar aqui a exclusao foi efetuada com sucesso
+                JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso!");
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }
+    
+    public void atualizarCliente(Clientes obj){
+            try {
+            //2º passo: criar uma string de comando SQL
+            String sql = "update tb_clientes set nome=?, email=?, cpf=?, telefone=? where id=?";
+
+            //3º passo: preparar o comando SQL para o driver
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setString(1, obj.getNome());
+            comando.setString(2, obj.getEmail());
+            comando.setString(3, obj.getCpf());
+            comando.setString(4, obj.getTelefone());
+            comando.setInt(5, obj.getId());
+            
+
+            //4º passo: executar o comando sql e fechar a conexão
+            comando.execute();
+            comando.close();
+            
+            //5º passo: pegar o id gerado pelo banco de dados atraves do cpf
+            sql = "select id from tb_clientes where cpf=?";
+            comando = conexao.prepareStatement(sql);
+            comando.setString(1,obj.getCpf());
+            
+            //com o comando preparado, executo o comando
+            //esse comando é de leitura do banco de dados, logo ele retorna um resultset
+            ResultSet rs = comando.executeQuery();
+            
+            //percorro o resultado até achar o campo "id"
+            while(rs.next()) {
+                obj.setId(rs.getInt("id"));
+            }
+            
+            //Se chegar aqui o cadastro foi efetuado com sucesso
+            JOptionPane.showMessageDialog(null, "Cadastro de cliente atualizado com sucesso!");
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
         }
     }
 

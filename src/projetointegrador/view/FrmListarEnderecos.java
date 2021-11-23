@@ -35,7 +35,7 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
                 endereco.getBairro(),
                 endereco.getCidade(),
                 endereco.getUf(),
-                endereco.getCliente()
+                //endereco.getCliente().getId(),
             } );
         }
     }
