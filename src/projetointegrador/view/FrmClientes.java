@@ -18,10 +18,32 @@ import projetointegrador.model.Clientes;
  */
 public class FrmClientes extends javax.swing.JFrame {
     
+    //listar todos os clientes que ha no banco de dados
     private void listarClientes() {
         ClientesDAO dao = new ClientesDAO();
         
         List<Clientes> lista = dao.listarClientes();
+        
+        DefaultTableModel tabela = (DefaultTableModel) jTableClientes.getModel();
+        
+        tabela.setNumRows(0);
+        
+        for(Clientes cliente: lista){
+            tabela.addRow(new Object[]{
+                cliente.getId(),
+                cliente.getNome(),
+                cliente.getEmail(),
+                cliente.getCpf(),
+                cliente.getTelefone()
+            } );
+        }
+    }
+    
+    //para fazer uma busca no sistema com resultados do que o usuario digitar
+    private void listarClientes(String busca) {
+        ClientesDAO dao = new ClientesDAO();
+        
+        List<Clientes> lista = dao.listarClientes(busca);
         
         DefaultTableModel tabela = (DefaultTableModel) jTableClientes.getModel();
         
@@ -810,6 +832,9 @@ public class FrmClientes extends javax.swing.JFrame {
         //se o campo pesquisar estiver em branco, lista todos os clientes
         if(TextFieldBuscaCliente.getText().isBlank()){
             listarClientes();
+        }
+        else{
+            listarClientes(TextFieldBuscaCliente.getText());
         }
     }//GEN-LAST:event_jButtonBuscarClientesActionPerformed
 

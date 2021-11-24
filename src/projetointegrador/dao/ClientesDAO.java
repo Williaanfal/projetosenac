@@ -113,6 +113,52 @@ public class ClientesDAO {
         } 
     }
     
+    public List<Clientes> listarClientes(String busca) {
+        try {
+            //1º passo: criar uma lista para armazenar os Clientes
+            List<Clientes> listaClientes = new ArrayList<>();
+            
+            //2º passo: criar o comando sql que seleciona todos os itens da
+            //tabela de clientes
+            String sql = "select * from tb_clientes WHERE concat_ws(id, cpf, email, nome, telefone) like ?";
+            
+            //3º passo: preparar o comando colocando na conexao que será
+            //utilizada para executá-lo no BD
+            PreparedStatement comando = conexao.prepareStatement(sql);
+            comando.setString(1,'%'+busca+'%');
+            
+            //4º passo: quando usamos JDBC, o resultado de um comando select 
+            //precisa ser armazenado em um objeto do tipo ResultSet
+            ResultSet rs = comando.executeQuery();
+            
+            //5º passo: criar um laço de repetição para adicionar os itens do
+            //ResultSet na lista criada no primeiro passo.
+            while(rs.next()){ //Enquanto(while) conseguir percorrer o próximo (next) item do ResultSet
+                //É preciso criar um objeto (obj) do modelo de endereços para 
+                //cada item que retorn do ResultSet;
+                Clientes obj = new Clientes();
+                
+                //Nesse objeto preciso salvar cada atributo dos campos do ResultSet
+                //em um atributo do objeto do tipo clientes
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setEmail(rs.getString("email"));
+                obj.setTelefone(rs.getString("telefone"));
+                
+                //Após todos os atributos serem inserido dentro do objeto
+                //preciso adicionar esse objeto na minha lista de enderecos
+                listaClientes.add(obj);       
+            }
+            //6º passo: após a lista ser criada, agora eu retorno como resultado
+            // do meu método a lista pronta.
+            return listaClientes;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        } 
+    }
+    
     public void deletarCliente(Clientes obj){
         int opcao = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o cliente?", "", JOptionPane.OK_CANCEL_OPTION);
         if (opcao == 0){

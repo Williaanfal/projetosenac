@@ -40,6 +40,30 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
         }
     }
     
+    private void tabelarEnderecos(String busca) {
+        EnderecosDAO dao = new EnderecosDAO();
+        
+        List<Enderecos> lista = dao.listarEnderecos(busca);
+        
+        DefaultTableModel tabela = (DefaultTableModel) jTableEnderecos.getModel();
+        
+        tabela.setNumRows(0);
+        
+        for(Enderecos endereco: lista){
+            tabela.addRow(new Object[]{
+                endereco.getId(),
+                endereco.getCep(),
+                endereco.getRua(),
+                endereco.getNumero(),
+                endereco.getComplemento(),
+                endereco.getBairro(),
+                endereco.getCidade(),
+                endereco.getUf(),
+                //endereco.getCliente().getId(),
+            } );
+        }
+    }
+    
     
     /**
      * Creates new form FrmListarEnderecos
@@ -62,8 +86,8 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        TextFieldBuscaEndereco = new javax.swing.JTextField();
+        jButtonBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableEnderecos = new javax.swing.JTable();
 
@@ -107,12 +131,18 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
-        jLabel8.setText("Nome:");
+        jLabel8.setText("Buscar:");
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        TextFieldBuscaEndereco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TextFieldBuscaEnderecoKeyPressed(evt);
+            }
+        });
+
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonBuscarActionPerformed(evt);
             }
         });
 
@@ -138,9 +168,9 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TextFieldBuscaEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(jButtonBuscar)))
                 .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
@@ -150,8 +180,8 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(TextFieldBuscaEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonBuscar))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(28, Short.MAX_VALUE))
@@ -160,13 +190,22 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        if(TextFieldBuscaEndereco.getText().isBlank()){
+            tabelarEnderecos();
+        }
+        else{
+            tabelarEnderecos(TextFieldBuscaEndereco.getText());
+        }
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         tabelarEnderecos();
     }//GEN-LAST:event_formWindowActivated
+
+    private void TextFieldBuscaEnderecoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextFieldBuscaEnderecoKeyPressed
+
+    }//GEN-LAST:event_TextFieldBuscaEnderecoKeyPressed
 
     /**
      * @param args the command line arguments
@@ -204,7 +243,8 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField TextFieldBuscaEndereco;
+    private javax.swing.JButton jButtonBuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -212,6 +252,5 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableEnderecos;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
