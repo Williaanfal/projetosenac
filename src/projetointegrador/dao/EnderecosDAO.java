@@ -47,10 +47,6 @@ public class EnderecosDAO {
             //4º passo: executar o comando sql e fechar a conexão
             comando.execute();
             comando.close();
-
-            //Se chegar aqui o cadastro foi efetuado com sucesso
-            JOptionPane.showMessageDialog(null, "Endereço cadastrado com sucesso!");
-
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -89,8 +85,7 @@ public class EnderecosDAO {
                 obj.setComplemento(rs.getString("complemento"));
                 obj.setBairro(rs.getString("bairro"));
                 obj.setCidade(rs.getString("cidade"));
-                obj.setUf(rs.getString("uf"));
-                //obj.getCliente().setId(rs.getInt("id_cliente"));              
+                obj.setUf(rs.getString("uf"));          
                 
                 //Após todos os atributos serem inserido dentro do objeto
                 //preciso adicionar esse objeto na minha lista de enderecos
@@ -140,7 +135,7 @@ public class EnderecosDAO {
                 obj.setBairro(rs.getString("bairro"));
                 obj.setCidade(rs.getString("cidade"));
                 obj.setUf(rs.getString("uf"));
-                //obj.getCliente().setId(rs.getInt("id_cliente"));              
+                obj.getCliente().setId(rs.getInt("id_cliente"));              
                 
                 //Após todos os atributos serem inserido dentro do objeto
                 //preciso adicionar esse objeto na minha lista de enderecos
@@ -154,5 +149,4 @@ public class EnderecosDAO {
             return null;
         }
     }
-
 }

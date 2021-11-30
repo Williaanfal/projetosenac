@@ -230,5 +230,4 @@ public class ClientesDAO {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-
 }

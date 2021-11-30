@@ -6,6 +6,7 @@
 package projetointegrador.view;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import projetointegrador.dao.EnderecosDAO;
 import projetointegrador.model.Enderecos;
@@ -34,8 +35,7 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
                 endereco.getComplemento(),
                 endereco.getBairro(),
                 endereco.getCidade(),
-                endereco.getUf(),
-                //endereco.getCliente().getId(),
+                endereco.getUf()
             } );
         }
     }
@@ -58,8 +58,7 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
                 endereco.getComplemento(),
                 endereco.getBairro(),
                 endereco.getCidade(),
-                endereco.getUf(),
-                //endereco.getCliente().getId(),
+                endereco.getUf()
             } );
         }
     }
@@ -151,9 +150,17 @@ public class FrmListarEnderecos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Cep", "Rua", "Número", "Complemento", "Bairro", "Cidade", "UF", "ID Cliente"
+                "ID", "Cep", "Rua", "Número", "Complemento", "Bairro", "Cidade", "UF"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTableEnderecos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
