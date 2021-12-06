@@ -134,8 +134,7 @@ public class EnderecosDAO {
                 obj.setComplemento(rs.getString("complemento"));
                 obj.setBairro(rs.getString("bairro"));
                 obj.setCidade(rs.getString("cidade"));
-                obj.setUf(rs.getString("uf"));
-                obj.getCliente().setId(rs.getInt("id_cliente"));              
+                obj.setUf(rs.getString("uf"));            
                 
                 //Após todos os atributos serem inserido dentro do objeto
                 //preciso adicionar esse objeto na minha lista de enderecos
